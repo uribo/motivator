@@ -1,0 +1,20 @@
+Package: motivator
+Type: Package
+Title: Keep and improve working motivation.
+Version: 0.1.0
+Date: 2014-12-04
+Description: Visualize your R working activity log.
+Authors@R: person("Shinya", "Uryu", email = "suika1127@gmail.com", role =
+    c("aut", "cre"))
+URL: https://github.com/uribo/motivator
+BugReports: https://github.com/uribo/motivator/issues
+License: MIT
+Depends:
+    R (>= 3.1.0)
+Imports:
+    dplyr,
+    ggplot2,
+    magrittr,
+    RColorBrewer,
+    stringr
+LazyData: true
