@@ -11,5 +11,6 @@ indicate_yr_activity <- function (df.year) {
     scale_fill_brewer(palette = "YlGn") +
     coord_fixed(ratio = 8 / 10) +
     theme(legend.position = "none",
-          panel.grid.major = element_blank())
+          panel.grid.major = element_blank(),
+          axis.text.x = element_text(angle = 45, hjust = 1))
 }

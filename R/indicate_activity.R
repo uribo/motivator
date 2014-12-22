@@ -9,5 +9,6 @@ indicate_activity <- function (df.point) {
     scale_fill_brewer(palette="YlGn") +
     theme_bw() +
     theme(legend.position = "none",
-          panel.grid.major = element_blank())
+          panel.grid.major = element_blank(),
+          axis.text.x = element_text(angle = 45, hjust = 1))
 }
