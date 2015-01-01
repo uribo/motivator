@@ -13,10 +13,10 @@ gen_report <- function (path = getwd(), rfiles, df.point) {
     mutate(Point = 0)
   df.point <- filter(df.point, Point != "NA") %>%
     rbind(df.point.na) %>%
-    mutate(Class = ifelse(Point / max(Point) < 0.20, 1,
-                          ifelse(Point / max(Point) <= 0.40, 2,
-                          ifelse(Point / max(Point) <= 0.60, 3,
-                          ifelse(Point / max(Point) <= 0.80, 4, 5)))))
+    mutate(Class = ifelse(Point == 0, 0,
+                   ifelse(Point / max(Point) < 0.25, 1,
+                   ifelse(Point / max(Point) <= 0.50, 2,
+                   ifelse(Point / max(Point) <= 0.75, 3, 4)))))
   
   return(df.point)
 }
