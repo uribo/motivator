@@ -21,15 +21,13 @@ devtools:install_github("uribo/motivator")
 
 ```{r}
 library(motivator)
-data(activity) %>%
-  head()
+activity %>% head()
 ```
 
 Try, below command in some R files exist directory.
 
 ```{r}
-gen_report() %>%
-  head()
+gen_report() %>% head()
 ```
 
 * `Point`...  Count `R` files (e.g. `.R`, `Rmd`, Image fie, `.pdf` etc.).
@@ -38,8 +36,7 @@ gen_report() %>%
 ### Plot Acitivity
 
 ```{r}
-gen_report() %>%
-  indicate_activity()
+gen_report() %>% indicate_activity()
 ```
 
 ![](https://github.com/uribo/motivator/raw/master/inst/assets/img/demo_activity_log.png)
@@ -50,18 +47,22 @@ gen_report() %>%
 [GitHub Contributions calendar](https://help.github.com/articles/viewing-contributions-on-your-profile-page/#viewing-contributions-from-specific-times)
 
 ```{r}
-data(activity) %>%
-  indicate_yr_activity()
+activity %>% indicate_yr_activity()
 ```
 
 ![](https://github.com/uribo/motivator/raw/master/inst/assets/img/demo_year_activity_log.png)
-
 
 or
 
 ```{r}
 gen_year_report() %>%
   indicate_yr_activity()
+```
+
+### Visualize GitHub Contribution
+
+```{r}
+indicate_gh_contribution(username = "uribo") # change to your username
 ```
 
 ## Workload
