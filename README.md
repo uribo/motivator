@@ -1,13 +1,12 @@
-motivator: Keep and improve working motivation.
-=====
+# motivator: Keep and improve working motivation.
 
-# Description
+## Description
 
 Visualize your R working activity log.
 
 Enjoy, your R work :)
 
-# Installation
+## Installation
 
 To install the development version use the `devtools` package:
 
@@ -16,9 +15,9 @@ To install the development version use the `devtools` package:
 devtools:install_github("uribo/motivator")
 ```
 
-# Demo
+## Demo
 
-## Setup
+### Setup
 
 ```{r}
 library(motivator)
@@ -36,7 +35,7 @@ gen_report() %>%
 * `Point`...  Count `R` files (e.g. `.R`, `Rmd`, Image fie, `.pdf` etc.).
 * `Class`... Relative point contribution value, 1 to 5.
 
-## Plot Acitivity
+### Plot Acitivity
 
 ```{r}
 gen_report() %>%
@@ -46,7 +45,7 @@ gen_report() %>%
 ![](https://github.com/uribo/motivator/raw/master/inst/assets/img/demo_activity_log.png)
 
 
-## Plot Year Activity (like a GitHub Contributions calendar)
+### Plot Year Activity (like a GitHub Contributions calendar)
 
 [GitHub Contributions calendar](https://help.github.com/articles/viewing-contributions-on-your-profile-page/#viewing-contributions-from-specific-times)
 
@@ -65,6 +64,6 @@ gen_year_report() %>%
   indicate_yr_activity()
 ```
 
-# Workload
+## Workload
 
 
