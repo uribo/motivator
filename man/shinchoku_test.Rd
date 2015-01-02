@@ -4,7 +4,7 @@
 \alias{shinchoku_test}
 \title{What about SHINCHOKU}
 \usage{
-shinchoku_test(goal, num = 1)
+shinchoku_test(goal = 1, num = 1)
 }
 \arguments{
 \item{goal}{}
