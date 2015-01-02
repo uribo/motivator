@@ -1,7 +1,7 @@
 Package: motivator
 Type: Package
 Title: Keep and improve working motivation.
-Version: 0.1.2
+Version: 0.2.0
 Date: 2015-01-02
 Description: Visualize your R working activity log.
 Authors@R: person("Shinya", "Uryu", email = "suika1127@gmail.com", role =
@@ -17,5 +17,6 @@ Imports:
     magrittr,
     RColorBrewer,
     rvest,
-    stringr
+    stringr,
+    yeah
 LazyData: true

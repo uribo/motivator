@@ -55,8 +55,7 @@ activity %>% indicate_yr_activity()
 or
 
 ```{r}
-gen_year_report() %>%
-  indicate_yr_activity()
+gen_year_report() %>% indicate_yr_activity()
 ```
 
 ### Visualize GitHub Contribution
@@ -65,6 +64,13 @@ gen_year_report() %>%
 indicate_gh_contribution(username = "uribo") # change to your username
 ```
 
+### SHINCHOKU DOUDESUKA
+
+What about progress?
+
+```{r}
+# If exsit .git directory.
+shinchoku_test(goal = 10)
+```
+
 ## Workload
-
-
