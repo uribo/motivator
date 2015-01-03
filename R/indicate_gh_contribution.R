@@ -2,7 +2,6 @@
 #' 
 #' @import dplyr
 #' @import ggplot2
-#' @import rvest
 #' @export
 indicate_gh_contribution <- function (username) {
   url <- html(paste("https://github.com/users", username, "contributions", sep = "/"))

@@ -1,6 +1,5 @@
 #' What about SHINCHOKU
 #' 
-#' @import magrittr
 #' @import stringr
 #' @import yeah
 #' @param goal
