@@ -1,18 +1,23 @@
-# Sample .travis.yml for R projects
-
-language: r
-warnings_are_errors: false
 sudo: required
 
-r_packages:
- - dplyr
- - ggplot2
- - magrittr
- - rvest
-r_github_packages:
- - dichika/yeah
-after_success:
-  - Rscript -e 'covr::codecov()'
+language: c
+
+before_install:
+  ## r-travis by Craig Citro et al
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+  - ./travis-tool.sh bootstrap
+
+install:
+  - ./travis-tool.sh install_aptget r-cran-dplyr r-cran-ggplot2 r-cran-magrittr r-cran-rvest
+  - ./travis-tool.sh install_github dichika/yeah
+
+script:
+  - ./travis-tool.sh run_tests
+  
+after_failure:
+  - ./travis-tool.sh dump_logs
+
 notifications:
   slack: us-lab:xTJ3Yh37JO4luAh9Yx6gXTck
   email: false
