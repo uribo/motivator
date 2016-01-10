@@ -4,6 +4,13 @@
 #' @import rvest
 #' @import ggplot2
 #' @param username character. Display user name (GitHub account).
+#' @details
+#' \if{html}{
+#' \out{<div style="text-align: center">}\figure{indicate-gh-contribution.png}{options: style="width:750px;max-width:90\%;"}\out{</div>}
+#' }
+#' \if{latex}{
+#' \out{\begin{center}}\figure{indicate-gh-contribution.png}\out{\end{center}}
+#' }
 #' @export
 #' @examples 
 #' \dontrun{

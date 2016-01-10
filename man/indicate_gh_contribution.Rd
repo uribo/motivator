@@ -12,4 +12,19 @@ indicate_gh_contribution(username = getOption("github.user"))
 \description{
 Visualize GitHub Contribution.
 }
+\details{
+\if{html}{
+\out{<div style="text-align: center">}\figure{indicate-gh-contribution.png}{options: style="width:750px;max-width:90\%;"}\out{</div>}
+}
+\if{latex}{
+\out{\begin{center}}\figure{indicate-gh-contribution.png}\out{\end{center}}
+}
+}
+\examples{
+\dontrun{
+indicate_gh_contribution(username = "uribo")
+
+track_url \%>\% purrr::flatmap(get_sc_artwork, ci)
+}
+}
 
