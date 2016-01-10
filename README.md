@@ -12,11 +12,12 @@ Enjoy, your R work :)
 
 ## Installation
 
-To install the development version use the `devtools` package:
+To install the development version use the **`{devtools}`** package or **`{githubinstall}`** etc.:
 
 ```{r}
 # install.packages("devtools")
-devtools:install_github("uribo/motivator")
+# devtools:install_github("hoxo-m/githubinstall")
+githubinstall::install_github_package("uribo/motivator")
 ```
 
 ## Demo

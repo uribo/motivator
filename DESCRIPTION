@@ -2,7 +2,7 @@ Package: motivator
 Type: Package
 Title: Keep and improve working motivation.
 Version: 0.2.0.9999
-Date: 2016-01-05
+Date: 2016-01-10
 Description: Visualize your R working activity log.
 Authors@R: person("Shinya", "Uryu", email = "suika1127@gmail.com", role =
     c("aut", "cre"))
