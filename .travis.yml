@@ -3,3 +3,13 @@
 language: r
 warnings_are_errors: false
 sudo: required
+r_binary_packages:
+ - dplyr
+ - ggplot2
+ - magrittr
+ - rvest
+r_github_packages:
+ - dichika/yeah
+notifications:
+  slack: us-lab:xTJ3Yh37JO4luAh9Yx6gXTck
+  email: false
