@@ -2,7 +2,7 @@
 
 [![Project Status: Wip - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/0.1.0/wip.svg)](http://www.repostatus.org/#wip)
 [![Travis-CI Build Status](https://travis-ci.org/uribo/motivator.svg?branch=master)](https://travis-ci.org/uribo/motivator)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/SUmisc)](http://cran.r-project.org/package=SUmisc)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/motivator)](http://cran.r-project.org/package=motivator)
 
 ## Description
 
@@ -12,7 +12,7 @@ Enjoy, your R work :)
 
 ## Installation
 
-To install the development version use the **`{devtools}`** package or **`{githubinstall}`** etc.:
+To install the development version use the [**`{devtools}`**](https://github.com/hadley/devtools) package or [**`{githubinstall}`**](https://github.com/hoxo-m/githubinstall) etc.:
 
 ```{r}
 # install.packages("devtools")
