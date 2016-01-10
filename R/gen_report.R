@@ -1,22 +1,24 @@
 #' Ploting your activity.
 #' 
 #' @import dplyr
-#' @import stringr
+#' @param path path a character vector of full path names; the default corresponds to the working directory, getwd().
+#' @return local data frame.
+#' @examples 
+#' \dontrun{
+#' gen_report()
+#' }
 #' @export
-gen_report <- function (path = getwd(), rfiles, df.point) {
-  rfiles <- list_rfiles(path)
-  df.point <- data.frame(table(rfiles)) %>%
-    rename(Date = rfiles, # name
-           Point = Freq)
-  
-  df.point.na <- filter(df.point, is.na(Point)) %>%
-    mutate(Point = 0)
-  df.point <- filter(df.point, Point != "NA") %>%
-    rbind(df.point.na) %>%
-    mutate(Class = ifelse(Point == 0, 0,
-                   ifelse(Point / max(Point) < 0.25, 1,
-                   ifelse(Point / max(Point) <= 0.50, 2,
-                   ifelse(Point / max(Point) <= 0.75, 3, 4)))))
-  
-  return(df.point)
+gen_report <- function(path = getwd()) {
+   list_rfiles(path) %>% 
+    dplyr::mutate(mdate  = lubridate::floor_date(mtime, unit = "day") %>% as.Date()) %>% 
+    dplyr::select(mdate) %>%
+    dplyr::group_by(mdate) %>% 
+    dplyr::summarise(point = n()) %>% 
+    dplyr::right_join(., 
+                      data.frame(mdate = seq(min(.$mdate), max(.$mdate), by = 1))) %>% 
+    dplyr::mutate(class = ifelse(is.na(point), 0,
+                                 ifelse(point / max(point, na.rm = TRUE) < 0.25, 1,
+                                        ifelse(point / max(point, na.rm = TRUE) <= 0.50, 2,
+                                               ifelse(point / max(point, na.rm = TRUE) <= 0.75, 3, 4))))) %>% 
+    return(.)
 }

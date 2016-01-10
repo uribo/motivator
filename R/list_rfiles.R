@@ -1,25 +1,23 @@
 #' List of R and Image files.
 #' 
-#' @param path a character vector of full path names; the default corresponds to the working directory, getwd().
-#' @return The list r and image filenames.
 #' @import dplyr
+#' @param path a character vector of full path names; the default corresponds to the working directory, getwd().
+#' @return local data frame. Contains r and image filenames.
 #' @export
-#' @note checked 141210
-list_rfiles <- function (path = getwd()) { 
-  rfiles <- list.files(path = path, include.dirs = TRUE) %>%
-    as.data.frame %>%
-    filter(grepl(
-    ".r$|.R$|.Rmd$|.gif$|.jpg$|.png$|.pdf$", .))
-  
-  colnames(rfiles) <- c("Filename")
-  rfiles$Filename <- as.character(rfiles$Filename)
-  
-  rfiles <- file.info(paste(rfiles$Filename, sep = "")) %>%
-    select(mtime) %>%
-    na.omit()
-  
-  rfiles$mtime <- str_sub(rfiles$mtime, start = 1, end =10)
-  rfiles$mtime <- as.factor(rfiles$mtime)
-  
-  return(rfiles)
+#' @note checked 2016-01-10
+list_rfiles <- function(path = getwd()) {
+  list.files(path = path,
+             recursive = TRUE,
+             pattern = "(.r$|.R$|.Rmd$|.gif$|.jpg$|.png$|.pdf$)") %>%
+    as.data.frame() %>%
+    dplyr::rename_(file_path = ".") %>%
+    dplyr::mutate(
+      file_path = as.character(file_path),
+      file_name = gsub(".+/|.+/.+%", "", file_path),
+      mtime     = file.mtime(file_path)
+    ) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(size = file.size(file_path) %>% utils:::format.object_size(units = "auto")) %>%
+    dplyr::ungroup() %>%
+    return(.)
 }

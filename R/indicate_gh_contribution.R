@@ -1,42 +1,47 @@
 #' Visualize GitHub Contribution.
 #' 
 #' @import dplyr
+#' @import rvest
 #' @import ggplot2
+#' @param username character. Display user name (GitHub account).
 #' @export
-indicate_gh_contribution <- function (username) {
-  url <- html(paste("https://github.com/users", username, "contributions", sep = "/"))
+#' @examples 
+#' \dontrun{
+#' indicate_gh_contribution(username = "uribo")
+#' 
+#' track_url %>% purrr::flatmap(get_sc_artwork, ci)
+#' }
+indicate_gh_contribution <- function(username = getOption("github.user")) {
   
-  Point <- url %>% 
-    html_nodes("svg g rect") %>%
-    html_attr("data-count") %>%
-    as.numeric()
+  xml2::read_html(paste("https://github.com/users", username, "contributions", sep = "/")) %>%
+    rvest::html_nodes(., css = "svg g rect") %>% {
+      Point    <<-
+        rvest::html_attr(., name = "data-count") %>% as.numeric()
+      Date     <<- rvest::html_attr(., "data-date")
+      Vitality <<- rvest::html_attr(., "fill")
+    }
   
-  Date <- url %>%
-    html_nodes("svg g rect") %>%
-    html_attr("data-date")
-  
-  df.gh <- cbind(Date, Point) %>%
+  df_gh <- cbind(Date, Point, Vitality) %>%
     as.data.frame() %>%
-    mutate(
-      Point = as.numeric(levels(Point)[Point]),
-      Date  = as.Date(Date),
-      Day   = as.factor(weekdays(Date, abbreviate = T)),
-      Week  = format(Date, "%U"),
-      Qt    = quarters.Date(Date),
-      Class = ifelse(Point == 0, 0,
-              ifelse(Point / max(Point) < 0.25, 1,
-              ifelse(Point / max(Point) <= 0.50, 2,
-              ifelse(Point / max(Point) <= 0.75, 3, 4)))))
+    dplyr::mutate(
+      Point    = as.numeric(levels(Point)[Point]),
+      Date     = as.Date(Date),
+      Day      = weekdays(Date, abbreviate = TRUE) %>% factor(levels = c("Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"),
+                                                              labels  = c("Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"),
+                                                              ordered = TRUE),
+      Week     = paste(lubridate::year(Date), format(Date, "%U"), sep = "-"),
+      Qt       = quarters.Date(Date),
+      Vitality = as.character(Vitality))
   
-  df.gh$Day %<>%  factor(levels = c("Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"))
-  
-  ggplot(df.gh, 
-         aes(x = Week, y = Day, 
-             fill = factor(Class))) +
-    geom_tile(color = "white", size = 1) +
-    scale_fill_manual(values = c("#eeeeee", "#d6e685", "#8cc665", "#44a340", "#1e6823")) +
-    coord_fixed(ratio = 8 / 10) +
-    theme(legend.position  = "none",
-          panel.grid.major = element_blank(),
-          axis.text.x      = element_text(angle = 45, hjust = 1))
+  df_gh %>% ggplot(aes(x = Week, y = Day)) +
+    geom_tile(fill = Vitality, color = "white", size = 1) +
+    scale_fill_manual(values = Vitality) +
+    coord_fixed(ratio = 1) +
+    theme(
+      legend.position  = "none",
+      panel.grid.major = element_blank(),
+      axis.text.x      = element_text(angle = 45, hjust = 1),
+      plot.title       = element_blank()
+    )
+  # ggsave("man/figures/indicate-gh-contribution.png", width = 8, height = 3)
 }
