@@ -1,13 +1,12 @@
 #' Ploting your activity.
 #' 
 #' @import ggplot2
-#' @import RColorBrewer
-#' @export 
-indicate_yr_activity <- function (df.year) {
+#' @param df data frame.
+indicate_yr_activity <- function (df) {
   
-  df.year$Day %<>%  factor(levels = c("Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"))
+  df$Day %<>%  factor(levels = c("Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"))
   
-  ggplot(df.year, 
+  ggplot(df, 
          aes(x = Week, y = Day, 
              fill = factor(Class))) +
     geom_tile(color = "white", size = 1) +
